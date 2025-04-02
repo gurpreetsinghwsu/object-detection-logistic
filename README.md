@@ -4,14 +4,15 @@ A simple object detection system using logistic regression. The system can detec
 
 ## Demo
 
-![Demo Video](demo.gif)
+![Demo Video](demo_updated.gif)
 
 The demo shows:
 - Left side: Input image (red rectangle = object present)
 - Right side: Model prediction and ground truth
 - Text color indicates prediction accuracy:
-  - Green = Correct prediction
-  - Red = Incorrect prediction
+  - Green = Correct prediction (matches ground truth)
+  - Red = Incorrect prediction (doesn't match ground truth)
+- Black text shows the actual ground truth for each image
 
 ## Features
 
@@ -47,7 +48,7 @@ python demo.py
 - `object_detection_model.joblib`: Trained model
 - `object_detection_scaler.joblib`: Feature scaler
 - `confusion_matrix.png`: Model performance visualization
-- `demo.mp4`: Demo video showing detection in action
+- `demo_updated.gif`: Demo video showing detection in action
 
 ## Requirements
 
