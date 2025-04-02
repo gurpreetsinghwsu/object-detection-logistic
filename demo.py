@@ -28,15 +28,24 @@ def main():
         prediction = model.predict(features_scaled)[0]
         
         display_img = cv2.resize(img, (64, 64))
-        text = "Object Detected" if prediction == 1 else "No Object"
-        color = (0, 255, 0) if prediction == 1 else (0, 0, 255)
         
+        # Check if prediction matches ground truth
+        correct_prediction = (prediction == 1 and has_object) or (prediction == 0 and not has_object)
+        
+        # Create result image
         result_img = np.ones((64, 256, 3), dtype=np.uint8) * 255
         result_img[:, :64] = display_img
-        cv2.putText(result_img, text, (74, 40), cv2.FONT_HERSHEY_SIMPLEX, 0.7, color, 2)
+        
+        # Add prediction text
+        pred_text = "Object Detected" if prediction == 1 else "No Object"
+        pred_color = (0, 255, 0) if correct_prediction else (0, 0, 255)  # Green if correct, Red if wrong
+        cv2.putText(result_img, pred_text, (74, 30), cv2.FONT_HERSHEY_SIMPLEX, 0.6, pred_color, 2)
+        
+        # Add ground truth text
+        truth_text = "Truth: Object Present" if has_object else "Truth: No Object"
+        cv2.putText(result_img, truth_text, (74, 50), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 0), 1)
         
         out.write(result_img)
-        
         cv2.imshow('Demo', result_img)
         cv2.waitKey(500)
     

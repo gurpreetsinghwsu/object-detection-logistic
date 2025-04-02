@@ -6,7 +6,12 @@ A simple object detection system using logistic regression. The system can detec
 
 ![Demo Video](demo.gif)
 
-The demo shows the model detecting objects in real-time. Green text indicates an object was detected, while red text indicates no object was detected.
+The demo shows:
+- Left side: Input image (red rectangle = object present)
+- Right side: Model prediction and ground truth
+- Text color indicates prediction accuracy:
+  - Green = Correct prediction
+  - Red = Incorrect prediction
 
 ## Features
 
