@@ -2,6 +2,12 @@
 
 A simple object detection system using logistic regression. The system can detect objects (red rectangles) in images using various image features.
 
+## Demo
+
+![Demo Video](demo.gif)
+
+The demo shows the model detecting objects in real-time. Green text indicates an object was detected, while red text indicates no object was detected.
+
 ## Features
 
 - Custom dataset generation
@@ -23,13 +29,20 @@ Run the main script:
 python custom_detection.py
 ```
 
+To run the demo:
+```bash
+python demo.py
+```
+
 ## Project Structure
 
 - `custom_detection.py`: Main script
+- `demo.py`: Demo script for visualization
 - `dataset/`: Generated dataset directory
 - `object_detection_model.joblib`: Trained model
 - `object_detection_scaler.joblib`: Feature scaler
 - `confusion_matrix.png`: Model performance visualization
+- `demo.mp4`: Demo video showing detection in action
 
 ## Requirements
 

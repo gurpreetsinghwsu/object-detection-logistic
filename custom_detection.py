@@ -36,20 +36,20 @@ def create_dataset():
     
     return object_images + background_images
 
-def extract_features(image_path):
-    img = cv2.imread(image_path)
-    img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
-    gray = cv2.cvtColor(img, cv2.COLOR_RGB2GRAY)
+def extract_features(image):
+    if isinstance(image, str):
+        img = cv2.imread(image)
+        img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+    else:
+        img = image.copy()
     
+    gray = cv2.cvtColor(img, cv2.COLOR_RGB2GRAY)
     mean_color = np.mean(img, axis=(0, 1))
     std_color = np.std(img, axis=(0, 1))
-    
     edges = cv2.Canny(gray, 100, 200)
     edge_density = np.sum(edges > 0) / (img.shape[0] * img.shape[1])
-    
     haralick = cv2.calcHist([gray], [0], None, [8], [0,256]).flatten()
     haralick = haralick / np.sum(haralick)
-    
     contours, _ = cv2.findContours(edges, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
     if contours:
         largest_contour = max(contours, key=cv2.contourArea)
@@ -57,7 +57,6 @@ def extract_features(image_path):
         perimeter = cv2.arcLength(largest_contour, True)
     else:
         area = perimeter = 0
-    
     return np.concatenate([mean_color, std_color, [edge_density], haralick, [area, perimeter]])
 
 def main():
