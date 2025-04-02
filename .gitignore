@@ -1,0 +1,8 @@
+.qodo
+
+dataset/
+*.joblib
+*.png
+__pycache__/
+*.pyc
+.DS_Store
